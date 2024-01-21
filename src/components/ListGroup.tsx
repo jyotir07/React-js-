@@ -1,30 +1,29 @@
 import { useState } from "react";
-function ListGroup() {
-  let items = ["London", "New York", "Paris", "Berlin", "Tokyo"];
-  let SelectecIndex = 0; //London is selected
+interface ListGroupProps {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void; //just like onClick property
+}
+function ListGroup({ items, heading, onSelectItem }: ListGroupProps) {
   //hook
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  arr[0]; //variable(selectedIndex)
-  arr[1]; //updater function
-
-  //better way below
-  const message = items.length === 0 && <p>No items found</p>;
   //const handleClick = (event: MouseEvent) => console.log(event);
   return (
     <>
-      <h1>List </h1>
-      {message}
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No item found</p>}
       <ul className="list-group">
         {items.map((item, index) => (
           <li
             className={
-              SelectecIndex === index
+              selectedIndex === index
                 ? "list-group-item active"
                 : "list-group-item"
             }
             key={item}
             onClick={() => {
-              SelectecIndex === index;
+              setSelectedIndex(index);
+              onSelectItem(item);
             }}
           >
             {item}
